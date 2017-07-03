@@ -1,0 +1,3 @@
+demo_checkpoint_upstateByKey.scala  这个执行的是个流处理  ， 从kafka中获得数据  做reduceBykey操作，再利用redis的累加功能实现实时统计几个指标的功能，后端读取redis数据并展现
+
+后端实际执行的是个redis_service这个jar包，jar里读取redis数据并按照前端展现的要求 包装成需要的json字符串
