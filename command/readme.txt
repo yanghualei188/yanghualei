@@ -1,0 +1,3 @@
+OSExecuter是在本地执行一个命令的java程序
+remoteExecuteCommand是可以在本地远程登陆外地的主机并执行外地主机命令的java程序
+remoteCommand_jars是执行远程登陆java所需要的jar包
