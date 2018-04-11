@@ -1,0 +1,9 @@
+需要执行两个命令
+命令一是先根据hive的表结构写好java程序，并打包，执行下面的命令，此命令是把hive的hdfs文件，转换成hbase能识别的格式的过程（打jar的时候需依赖的hbase的jar包 一定要一并打上，而且，jar包要在命名为lib的文件夹中才可）
+hadoop jar ta_mktag_total_day_hbase.jar  hbase_basic_api.ta_mktag_total_day_hbase3 /user/hive/warehouse/ta_mktag_total_day_hbase      /yhl/test/0615_mr15  ta_mktag_total_day_hbase
+命令二是把上个命令转换好的数据关联到hbase表中
+hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles    /yhl/test/0615_mr15  ta_mktag_total_day_hbase
+
+
+建表语句 （特别注意要有压缩 和  要预分区，分区的多少，根据数据的大小和hdfs中block块的大小，相除  ，以及打开布隆过滤）
+create 'ta_mktag_star_level_month', {NAME=>'cf',COMPRESSION=>'SNAPPY',BLOOMFILTER=>'ROW',VERSIONS=>1}, {NUMREGIONS =>200, SPLITALGO => 'HexStringSplit'}  
