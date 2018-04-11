@@ -1,0 +1,18 @@
+#!/usr/local/bin/expect
+set file [lindex $argv 0]
+set timeout 10
+spawn ftp 10.141.74.29
+expect "Name*"
+send "bigdata\r"
+expect "Password:"
+send "bigdata@123#qwe\r"
+expect "ftp>"
+send "cd mlp_in\r"
+expect "ftp>"
+send "lcd /tmp/mlp_in\r"
+expect "ftp>"
+send "prompt off\r"
+expect "ftp>"
+send "mget $file\r"
+expect "ftp>"
+send "quit\r"
